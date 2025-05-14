@@ -20,6 +20,29 @@ func NewCondition() *Condition {
 	}
 }
 
+func (c *Condition) StringWidth(s string) int {
+	var width int
+	g := uniseg.NewGraphemes(s)
+	for g.Next() {
+		var chWidth int
+		runes := g.Runes()
+		for _, r := range runes {
+			if r == '\t' {
+				chWidth = c.TabWidth - width%c.TabWidth
+				break
+			}
+
+			chWidth = c.BaseCondition.RuneWidth(r)
+
+			if chWidth > 0 {
+				break
+			}
+		}
+		width += chWidth
+	}
+	return width
+}
+
 func (c *Condition) ExpandTab(s string) string {
 	var sb strings.Builder
 	var width int
