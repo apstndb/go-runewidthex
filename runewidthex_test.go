@@ -1,4 +1,4 @@
-package go_runewidthex
+package runewidthex
 
 import "testing"
 

@@ -1,4 +1,4 @@
-package go_runewidthex
+package runewidthex
 
 import (
 	"strings"
@@ -10,13 +10,13 @@ import (
 // Condition have flag EastAsianWidth whether the current locale is CJK or not.
 type Condition struct {
 	BaseCondition *runewidth.Condition
-	Tabstop       int
+	TabWidth      int
 }
 
 func NewCondition() *Condition {
 	return &Condition{
 		BaseCondition: runewidth.NewCondition(),
-		Tabstop:       4,
+		TabWidth:      4,
 	}
 }
 
@@ -34,7 +34,7 @@ func (c *Condition) ExpandTab(s string) string {
 				sb.WriteRune(r)
 				break
 			} else if r == '\t' {
-				chWidth = c.Tabstop - width%c.Tabstop
+				chWidth = c.TabWidth - width%c.TabWidth
 				sb.WriteString(strings.Repeat(" ", chWidth))
 				break
 			}
@@ -68,11 +68,11 @@ func (c *Condition) Wrap(s string, w int) string {
 			continue
 		}
 		if r == '\t' {
-			cw = c.Tabstop - width%c.Tabstop
+			cw = c.TabWidth - width%c.TabWidth
 			if width+cw > w {
 				out += "\n"
 				width = 0
-				cw = c.Tabstop
+				cw = c.TabWidth
 				out += strings.Repeat(" ", cw)
 				width += cw
 				continue
