@@ -73,12 +73,9 @@ func (c *Condition) Wrap(s string, w int) string {
 				out += "\n"
 				width = 0
 				cw = c.TabWidth
-				out += strings.Repeat(" ", cw)
-				width += cw
-				continue
 			}
 
-			out += string(r)
+			out += strings.Repeat(" ", cw)
 			width += cw
 			continue
 		}
