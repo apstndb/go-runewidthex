@@ -7,7 +7,7 @@ import (
 	"github.com/rivo/uniseg"
 )
 
-// Condition have flag EastAsianWidth whether the current locale is CJK or not.
+// Condition has flag EastAsianWidth whether the current locale is CJK or not.
 type Condition struct {
 	BaseCondition *runewidth.Condition
 	TabWidth      int
